@@ -1,6 +1,5 @@
 use <boxes.scad>
 
-
 module rounded_cylinder(r,h,n) {
   rotate_extrude(convexity=1) {
     offset(r=n) offset(delta=-n) square([r,h]);
@@ -11,6 +10,12 @@ module rounded_cylinder(r,h,n) {
 l=247.5; hf=8; h=1;
 r=2;
 g = 0.8;
+
+translate([0,0,-15]) cube([10,10,20]);
+translate([0,60,-15]) cube([10,10,20]);
+
+translate([230,60,-15]) cube([10,10,20]);
+translate([230,0,-15]) cube([10,10,20]);
 
 
 translate([-2,+0.625,-0.5-2.5]) union(){
@@ -43,8 +48,7 @@ translate([-2,+0.625,-0.5-2.5]) union(){
                 //Raspi Display cutout
                 translate([l/2,93/2+1-0.625,hf/2+2.5]) rotate([0,0,90]) roundedBox([112,193.5,hf],8, true); //gesamte platz fürs display  
                 }
-            
-        
+
         //Balken und Verbindung zu rahmen rechts
             
             mirror([0,1,0])translate([-126.2,-93.76,0]) difference(){
@@ -66,82 +70,13 @@ translate([-2,+0.625,-0.5-2.5]) union(){
                 translate([l/2,93/2+1-0.625,hf/2+2.5]) rotate([0,0,90]) roundedBox([112,193.5,hf],8, true); //gesamte platz fürs display  
                 }
             }
-            d1=3.2;
+            d1=4;
             translate([l/2+65.11,93/2-33.42,h/2-5]) cylinder(d=d1,h=10,$fn=100);
             translate([l/2+65.11-126.2,93/2-33.42,h/2-5]) cylinder(d=d1,h=10,$fn=100);
             translate([l/2+65.11-126.2,93/2+1-(112/2-21.58)+65.65,h/2-5]) cylinder(d=d1,h=10,$fn=100);
             translate([l/2+65.11,93/2+1-(112/2-21.58)+65.65,h/2-5]) cylinder(d=d1,h=10,$fn=100);
         }
-        
-        
-        
-        //?*translate([l/2-126.2+194/2-(11.89+20),93/2+1-(112/2-21.58)+1+32,h+hf+1.5-8.5]) cube([5,115.5,h],center=true);
-        
-        
-//        //11.9+20  nach innen
-//        //21.58 nach unten
-//
-//        translate([194/4+12+194/2-(11.89+20)+0.15,93/2+1-(112/2-21.58)+65.65,h]) cube([126.2+5,5,h],center=true);
-//        translate([194/4+12+194/2-(11.89+20)+0.15,93/2+1-(112/2-21.58),h]) cube([126.2+5,5,h],center=true);
-//
-//      
-//
-//        //li oben
-//        color("blue") translate([l/2+194/2-(11.89+20),93/2+1-(112/2-21.58)-2.5-21.58-g,h+6.5/2+2.5/2]) cube([5,5,h+6.5+2.5],center=true);
-//        translate([l/2+194/2-(11.89+20),93/2+1-(112/2-21.58)+32+1-25,h]) cube([5,65.5,h],center=true);
-//
-//        translate([l/2+194/2-(11.89+20)+2.5+20-15,93/2+1-(112/2-21.58),h]) cube([55,5,h],center=true);
-//        color("blue") translate([g+l/2+194/2-(11.89+20)+2.5+20,93/2+1-(112/2-21.58),h+4.56/2+2.5/2]) cube([5,5,h+4.56+2.5],center=true);
-//        color("blue") translate([g+l/2+194/2-(11.89+20)+2.5+20+12.5,93/2+1-(112/2-21.58),h+6.5/2+2.5/2]) cube([5,5,h+6.5+2.5],center=true);
-//        //+2.5+20+11.9
-//
-//        //re oben
-//        color("blue") translate([l/2+194/2-(11.89+20)-126.2,93/2+1-(112/2-21.58)-2.5-21.58-g,h+6.5/2+2.5/2]) cube([5,5,h+6.5+2.5],center=true);
-//        translate([l/2+194/2-(11.89+20)-126.2,93/2+1-(112/2-21.58)+32+1-25,h]) cube([5,65.5,h],center=true);
-//
-//        translate([-140+l/2+194/2-(11.89+20)+2.5+20-15,93/2+1-(112/2-21.58),h]) cube([55,5,h],center=true);
-//        color("blue") translate([-g+l/2+194/2-(11.89+20)-126.2-2.5-20,93/2+1-(112/2-21.58),h+5.16/2+2.5/2]) cube([5,5,h+5.16+2.5],center=true);
-//        color("blue") translate([-g+l/2+194/2-(11.89+20)-126.2-35,93/2+1-(112/2-21.58),h+6.5/2+2.5/2]) cube([5,5,h+6.5+2.5],center=true);
-//
-//        //re unten
-//        //3.5 schwarz schmal unten
-//        //20vom loch bis grau ende
-//
-//        color("blue") translate([l/2+194/2-(11.89+20)-126.2,93/2+1-(112/2-21.58)+2.5+65.65+20+3.5+g,h+6.5/2+2.5/2]) cube([5,5,h+6.5+2.5],center=true);
-//        translate([l/2+194/2-(11.89+20)-126.2,50+93/2+1-(112/2-21.58)+32+1-25,h]) cube([5,65.5,h],center=true);
-//
-//        translate([-140+l/2+194/2-(11.89+20)+2.5+20-15,93/2+1-(112/2-21.58)+65.65,h]) cube([55,5,h],center=true);
-//        color("blue") translate([-g+l/2+194/2-(11.89+20)-126.2-2.5-20,93/2+1-(112/2-21.58)+65.65,h+5.16/2+2.5/2]) cube([5,5,h+5.16+2.5],center=true);
-//        //color("blue") translate([-g+l/2+194/2-(11.89+20)-126.2-2.5-20-11.9,93/2+1-(112/2-21.58)+65.65,h+6.5/2+2.5/2]) cube([5,5,h+6.5+2.5],center=true);
-//        color("blue") translate([-g+l/2+194/2-(11.89+20)-126.2-35,93/2+1-(112/2-21.58)+65.65,h+6.5/2+2.5/2]) cube([5,5,h+6.5+2.5],center=true);
-//
-//
-//        //li unten
-//        color("blue") translate([126.2+l/2+194/2-(11.89+20)-126.2,93/2+1-(112/2-21.58)+2.5+65.65+20+3.5+g,h+6.5/2+2.5/2]) cube([5,5,h+6.5+2.5],center=true);
-//        translate([126.2+l/2+194/2-(11.89+20)-126.2,50+93/2+1-(112/2-21.58)+32+1-25,h]) cube([5,65.5,h],center=true);
-//
-//        translate([l/2+194/2-(11.89+20)+2.5+20-15,93/2+1-(112/2-21.58)+65.65,h]) cube([55,5,h],center=true);
-//        color("blue") translate([g+l/2+194/2-(11.89+20)+2.5+20,93/2+1-(112/2-21.58)+65.65,h+4.56/2+2.5/2]) cube([5,5,h+4.56+2.5],center=true);
-//        //color("blue") translate([g+l/2+194/2-(11.89+20)+2.5+20+11.9,93/2+1-(112/2-21.58)+65.65,h+6.5/2+2.5/2]) cube([5,5,h+6.5+2.5],center=true);
-//        color("blue") translate([g+l/2+194/2-(11.89+20)+2.5+20+12.5,93/2+1-(112/2-21.58)+65.65,h+6.5/2+2.5/2]) cube([5,5,h+6.5+2.5],center=true);
 }
-
-//
-//
-//translate([-2,+0.625,-3]) union(){
-//    //holes
-//    
-//    color("blue") translate([l/2+194/2-(11.89+20),47.5-(112/2-21.58),h/2])cylinder(d=2,h=h+r,$fn=100);
-//    color("blue") translate([l/2+194/2-(11.89+20)-126.2,47.5-(112/2-21.58),h/2])cylinder(d=2,h=h+r,$fn=100);
-//    color("blue") translate([l/2+194/2-(11.89+20),47.5-(112/2-21.58)+65.65,h/2])cylinder(d=2,h=h+r,$fn=100);
-//    color("blue") translate([l/2+194/2-(11.89+20)-126.2,47.5-(112/2-21.58)+65.65,h/2]) cylinder(d=2,h=h+r,$fn=100);
-//
-//    *translate([0,0,hf-h]) union(){
-//        color("red") translate([l/2+65.11,13.08+65.65/2,h/2+3-8.5+2.5])cube([5,115,h],center=true);
-//        color("red") translate([l/2+65.11-126.2,13.08+65.65/2,h/2+3-8.5+2.5])cube([5,115,h],center=true);
-//    }
-//}
-
 
 difference(){
     union(){
@@ -187,12 +122,13 @@ difference(){
     //smaller = 5;
     //translate([l/2,93/2+1,h/2]) rotate([0,0,90]) roundedBox([112-smaller,194-smaller,h+5],8, true);    //erstellt rahmen damit display nicht nach vor fällt
     translate([l/2,93/2+1,-hf/2+2]) rotate([0,0,90]) cube([150,300,hf],center=true);
-    
-    translate([15,16.25,-8.6-0.5]) rotate([90,0,90]) cube([26,33,8.5],true); //SD Slot
-    translate([15,16.25-4.25+3.5,0]) rotate([90,0,90]) cube([15,33,2.5],true); //SD Slot Front
-    
-    difference(){
-        union(){
+    echo(-8.6-0.5-0.8);
+    translate([15,16.25,-10.1]) rotate([90,0,90]) cube([26,33,8.5],true); //SD Slot
+    translate([15,16.25-4.25+3.5+0.75,0]) rotate([90,0,90]) cube([15,33,2.5],true); //SD Slot Front
+    translate([15,16.25,-8.6-0.5+31]) sphere(15);
+    /*translate([0,0.75,0]) difference(){
+   
+        /*union(){
             translate([-11,0,0]) difference(){
                 translate([15,16.25-4.25+3.5,0]) cylinder(d=30,h=10,$fn=100);
                 translate([15-3,16.25-4.25+3.5,0]) cube([30,30,30],center=true);
@@ -202,13 +138,9 @@ difference(){
                 translate([15-3,16.25-4.25+3.5,0]) cube([30,30,30],center=true);
             }
         }
-        
         translate([15+3,16.25-23.25,-8.9-1+0.3+15]) cube([30,30,10],center=true);
         translate([15+3,16.25+21.75,-8.9-1+0.3+15]) cube([30,30,10],center=true);
-    }
+    }*/
 }
-
-
-//color("lime") translate([0,0,7.5+1]) cube([5,5,15],true);
 
 
