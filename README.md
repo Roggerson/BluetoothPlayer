@@ -9,6 +9,7 @@ In order to achieve bluetooth connection and control my phone via the raspi i wr
 that manage these parts
 
 Working at this point:
+
 Scanning for Devices and savind Mac Address and Bluetooth Name
 Pairing with a scanned device, during pairing you have to put in a code on the pi that is display on your phone
 removing  all paired and trusted devices
@@ -18,7 +19,8 @@ As far as the 3D printing goes
 A frame that holds the raspi and fits into my car (Seat ibiza 6J 2009) has been desgined
 
 
-ToDo
+ToDo:
+
 Build graphical interface for user (Some kind of mp3 player), will do this most likely with html,js,...
 Add Hooks that hold the frame in place instead of built in car radio
 Supplying raspi with car battery
