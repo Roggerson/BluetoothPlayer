@@ -58,10 +58,6 @@ expect -re $prompt
 send "trust $mac\r"
 sleep 1
 
-expect -re $prompt
-send "connect $mac\r"
-sleep 1
-
 set outFileId [open $outputFilename "a"] 
 puts $outFileId $mac
 close $outFileId
