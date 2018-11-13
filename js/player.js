@@ -28,6 +28,9 @@ function buttonPlayPress() {
 
 }
 
+//Progress bar player
+
+
 $(document).ready(function() {
     $(".rippler").rippler({
       effectClass      :  'rippler-effect'
