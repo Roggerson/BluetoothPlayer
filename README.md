@@ -1,4 +1,4 @@
-# radio
+# Raspi Bluetooth Music Player for Vehicles
 DIY multimedia car radio with touchscreen display, smartphone connectivity and custom 3d printed cases
 s
 With this project I want to build my own bluetooth car radio which consists of:
