@@ -20,7 +20,8 @@ Controling audio flow (play,paues,skip,previous,Display Track,Progess of song)
 As far as the 3D printing goes
 A frame that holds the raspi and fits into my car (Seat ibiza 6J 2009) has been desgined
 
-Basic GUI present (progress bar, play/pause button
+Basic GUI  (progress bar, play/pause button)
+![alt text](https://raw.githubusercontent.com/Roggerson/radio/master/tmp/file.png)
 
 ToDo
 
