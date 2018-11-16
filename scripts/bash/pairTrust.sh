@@ -7,8 +7,6 @@ set prompt "#"
 
 set mac [lindex $argv 0];
 
-set outputFilename "trustedDevices.txt"
-
 spawn bluetoothctl
 
 expect -re $prompt
@@ -42,13 +40,22 @@ expect {
                 exit -1
         }
 
-
 	-re "Enter passkey" {
 		send_user "\nDevice available\n"
-		while 1 {
-                interact "\r" { send "\r";break}
-                }
+                sleep 10
 
+                ##instead of user input directly in the console we read a file
+                set f [open "/var/www/html/radiogui/scripts/bash/passKey.txt" "r"]
+                set passKey [read -nonewline $f]
+                close $f
+
+                #user interaction directly in console
+		#while 1 {
+                #interact "\r" { send "\r";break}
+                #}
+
+                send_user "\n V Passkey is: $passKey V \n"
+                send "$passKey\r"
 		exp_continue	
 	}
 exp_continue
@@ -58,14 +65,12 @@ expect -re $prompt
 send "trust $mac\r"
 sleep 1
 
+set outputFilename "/var/www/html/radiogui/scripts/bash/trustedDevices.txt"
 set outFileId [open $outputFilename "a"] 
 puts $outFileId $mac
 close $outFileId
-
 
 expect -re $prompt
 send "quit\r"
 
 expect eof
-
-

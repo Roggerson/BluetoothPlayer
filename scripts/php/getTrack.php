@@ -1,6 +1,11 @@
 <?php
-$mac = $_REQUEST['mac'];
-$songInfo=shell_exec("../bash/control.sh $mac Track");
+$mac = trim($_REQUEST['mac']);
+
+
+
+$songInfo=shell_exec("/var/www/html/radiogui/scripts/bash/control.sh $mac Track");
+$nowMilliSec=shell_exec("/var/www/html/radiogui/scripts/bash/control.sh $mac Position");
+
 //Character positions of each 
 $posAlbum=strpos($songInfo,"Album: ");
 $posArtist=strpos($songInfo,"Artist: ");
@@ -17,9 +22,21 @@ $artist=trim(substr($songInfo,$posArtist+strlen("Artist: "),$posDuration-$posArt
 $duration=trim(substr($songInfo,$posDuration+strlen("Duration: "),$posItem-$posDuration-strlen("Duration: ")));
 $title=trim(substr($songInfo,$posTitle+strlen("Title: "),$posTrackNumber-$posTitle-strlen("Title: ")));
 
-$durSec=intval(($duration/1000)%60);//sec
-$durMin=intval($duration/1000/60);//min
-echo "<div id='trackinfo'> <i id='album'>".$album."</i> <i id='artist'>".$artist."</i> <i id='duration'>".$durMin.":".$durSec."</i><i id='title'>".$title."</i></div>";
+$title=substr($title,0,21);
+$artist=substr($artist,0,23);
+$durMin=intval($duration/1000/60);
+$durSec=intval(($duration/1000)%60);
+if($durSec<10){
+    $durSec="0".$durSec;
+}
+
+$nowMin=intval($nowMilliSec/1000/60);
+$nowSec=intval(($nowMilliSec/1000)%60);
+if($nowSec<10){
+    $nowSec="0".$nowSec;
+}
+
+echo "<div id='trackinfo'><p id='artist'>".$artist."</p><p id='title'>".$title."</p><p id='duration'>".$durMin.":".$durSec."</p><p id='position'>".$nowMin.":".$nowSec."</p></div></p><p id='hiddenPosition'>".intval($nowMilliSec/1000)."</p><p id='hiddenDuration'>".intval($duration/1000)."</p></div>";
 //Album
 //Artist
 //Duration

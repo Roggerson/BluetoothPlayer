@@ -11,7 +11,10 @@ html {
 }
 body {
   margin: 0;
+  overflow: hidden;
 }
+
+
 article,
 aside,
 details,
@@ -195,8 +198,6 @@ th {
     color: #000 !important;
     text-shadow: none !important;
     background: transparent !important;
-    -webkit-box-shadow: none !important;
-            box-shadow: none !important;
   }
   a,
   a:visited {
@@ -1082,10 +1083,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.42857143;
-  color: #333;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
   background-color: #fff;
 }
 input,
@@ -1582,10 +1580,8 @@ pre code {
   overflow-y: scroll;
 }
 .container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+  margin-right: none;
+  margin-left: none;
 }
 @media (min-width: 768px) {
   .container {
@@ -3003,7 +2999,7 @@ select[multiple].input-lg {
 /*safdat*/
 .btn {
   color: #C0C0C0;
-  background-color: #000000;
+  background-color: #ffffff;
   border-color: #000000;
   
 /*safdat*/
@@ -5139,8 +5135,6 @@ a.thumbnail.active {
   overflow: hidden;
   background-color: #f5f5f5;
   border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
-          box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
 }
 .progress-bar {
   float: left;

@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+
+}
+
+.progress {
+  position: fixed;   
+  width: 800px;
+  height: 400px;
+  overflow: hidden;
+  
+  background-color: rgb(255, 255, 255);
+  z-index: -2;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+  background-color: rgb(255, 255, 255);
+
+}
+.progress-circle {
+transform: rotate(-90deg);
+position: fixed;
+left:25%;
+}
+
+.progress-circle-back {
+position: fixed;
+fill: rgb(70, 69, 69); 
+stroke: rgb(218, 217, 217);
+stroke-width:20px;
+}
+
+.progress-circle-prog {
+fill: none; 
+
+stroke: rgb(30, 255, 0);
+stroke-width: 20;  
+stroke-dasharray: 0 999;    
+stroke-dashoffset: 0px;
+  transition: stroke-dasharray 1.5s ease 0s;
+}
+
+.progress-text {
+width: 100%;
+position: absolute;
+top: 70%;
+text-align: center;
+font-size: 30px;
+color: rgb(240, 240, 240);
+}

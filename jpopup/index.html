@@ -1,0 +1,969 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>jQuery Popup Overlay</title>
+
+    <!-- Force latest IE, Google Chrome Frame for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta name="description" content="jQuery plugin for responsive and accessible modal windows and tooltips." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap styles -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <style>
+        [class*="fa-"]:before {
+          font-family: 'FontAwesome', sans-serif;
+        }
+    </style>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-1.8.2.min.js"></script>
+
+    <!-- jQuery Popup Overlay -->
+    <script src="jquery.popupoverlay.js"></script>
+
+    <!-- Custom styles for the demo page -->
+    <style>
+    img {
+        max-width: 100%;
+    }
+    .well {
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        display:none;
+        margin:1em;
+    }
+    pre.prettyprint {
+        padding: 9px 14px;
+    }
+    .fulltable {
+        max-width: 100%;
+        overflow: auto;
+    }
+    .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .lineheight {
+        line-height: 3em;
+    }
+    .pagetop {
+        background-image: url(data:image/png;base64,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);
+        background-color: #333;
+        background-attachment: fixed;
+        color: #fff;
+    }
+    .page-header {
+        border-bottom: none;
+    }
+    .initialism {
+        font-weight: bold;
+        letter-spacing: 1px;
+        font-size: 12px;
+    }
+
+    </style>
+</head>
+<body>
+
+<div class="pagetop">
+    <div class="container">
+        <div class="page-header col-md-10 col-md-offset-1">
+            <h1>jQuery Popup Overlay</h1>
+            <p>jQuery plugin for responsive and accessible modal windows and tooltips</p>
+            <p class="h1">
+                <a href="https://github.com/vast-engineering/jquery-popup-overlay/archive/gh-pages.zip" class="btn btn-primary btn-success btn-lg"><span class="fa-download"></span> Download</a>
+                <a href="https://github.com/vast-engineering/jquery-popup-overlay" class="btn btn-lg btn-default"><span class="fa-github"></span> View project on GitHub</a>
+            </p>
+            <p class="text-muted">Currently v1.7.13</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <section class="col-md-10 col-md-offset-1">
+
+        <h2>Demo</h2>
+
+        <p class="lineheight">
+            <a class="initialism basic_open btn btn-success" href="#basic">Basic</a>
+            <a class="initialism fade_open btn btn-success" href="#fade">Fade</a>
+            <a class="initialism fadeandscale_open btn btn-success" href="#fadeandscale">Fade &amp; scale</a>
+            <button class="initialism slide_open btn btn-success">Slide</button>
+            <button class="initialism standalone_open btn btn-success">Stand alone</button>
+            <a class="initialism active_bg_open btn btn-success" href="#active_bg">Active background</a>
+            <a href="#my_tooltip" class="initialism my_tooltip_open btn btn-success" id="my_tooltip_open">Tooltip</a>
+            <button class="initialism fall_open btn btn-success">Callback events</button>
+            <button class="initialism other_open btn btn-success">&hellip;</button>
+        </p>
+
+        <h2>Features</h2>
+
+        <ul>
+            <li><b>Positioned with CSS:</b>
+                Overlays are horizontally and vertically centered with CSS, without any JavaScript offset calculations,
+                therefore remain centered even if their height change.</li>
+            <li><b>Suitable for responsive web design: </b>
+                Overlays are fully customizable with CSS and will adapt to any screen size and orientation.
+                You can set a flexible minimum and maximum width and height to the overlay, as well as media queries.</li>
+            <li><b>Always visible: </b>
+                If the height of the overlay exceeds the visible area, vertical scrolling
+                 will be automatically enabled to prevent the off-screen content from being unreachable.</li>
+            <li><b>Accessible: </b>
+                Keyboard navigable using <kbd>Tab</kbd> key. <abbr title="Web Accessibility Initiative - Accessible Rich Internet Applications">WAI-ARIA</abbr> roles are added automatically if missing. Text resizing or zooming will not break the layout, visibility, or position of the popup.</li>
+            <li><b>Device independent: </b>
+                Works well on desktops, tablets, most modern phones and other devices. Optimized and tested in all modern browsers including <abbr title="Internet Explorer 7 and later">IE7+</abbr>, and in new versions of popular screen readers including JAWS, NVDA, and VoiceOver.</li>
+                <li><b>Flexible and customizable: </b>
+                    Supports multiple popup instances, custom CSS3 animations and transitions...</li>
+        </ul>
+
+        <h2>Usage</h2>
+
+<pre class="prettyprint">
+<code>&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Site Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;!-- Add an optional button to open the popup --&gt;
+  &lt;button class="my_popup_open"&gt;Open popup&lt;/button&gt;
+
+  &lt;!-- Add content to the popup --&gt;
+  &lt;div id="my_popup"&gt;
+
+    ...popup content...
+
+    &lt;!-- Add an optional button to close the popup --&gt;
+    &lt;button class="my_popup_close"&gt;Close&lt;/button&gt;
+
+  &lt;/div&gt;
+
+  &lt;!-- Include jQuery --&gt;
+  &lt;script src="https://code.jquery.com/jquery-1.8.2.min.js"&gt;&lt;/script&gt;
+
+  &lt;!-- Include jQuery Popup Overlay --&gt;
+  &lt;script src="https://cdn.rawgit.com/vast-engineering/jquery-popup-overlay/1.7.13/jquery.popupoverlay.js"&gt;&lt;/script&gt;
+
+  &lt;script&gt;
+    $(document).ready(function() {
+
+      // Initialize the plugin
+      $('#my_popup').popup();
+
+    });
+  &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code>
+</pre>
+
+        <h3>Options</h3>
+
+        <div class="fulltable">
+        <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>type</td>
+            <td>'overlay'<br />'tooltip'</td>
+            <td>'overlay'</td>
+            <td>Sets popup type to overlay or tooltip.</td>
+        </tr>
+        <tr>
+            <td>autoopen</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Shows the popup when initialized.</td>
+        </tr>
+        <tr>
+            <td>scrolllock</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Disables scrolling of background content while the popup is visible.</td>
+        </tr>
+        <tr>
+            <td>background</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td>Enables background cover.<br />
+                <small  class="text-muted">Disabled for tooltips.</small></td>
+        </tr>
+        <tr>
+            <td>backgroundactive</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Disable background cover and keep background elements active.<br />
+                <small  class="text-muted">Implies background, blur and scrolllock to false</small></td>
+        </tr>
+        <tr>
+            <td>color</td>
+            <td>string <small class="text-muted"><i>(CSS&nbsp;color)</i></small></td>
+            <td>'#000'</td>
+            <td>Sets background color.</td>
+        </tr>
+        <tr>
+            <td>opacity</td>
+            <td>float</td>
+            <td>0.5</td>
+            <td>Sets background opacity.</td>
+        </tr>
+        <tr>
+            <td>horizontal</td>
+            <td>'center'<br />'left'<br />'right'<br /><span class="text-muted">'leftedge'</span><br /><span class="text-muted">'rightedge'</span></td>
+            <td>'center'</td>
+            <td><p>Sets horizontal position.</p>
+                <p class="text-muted"><small>Options `leftedge` and `rightedge` can be used only for tooltips, and will align the tooltip to the left or right edge of the opening element (`openelement`).</small></p></td>
+        </tr>
+        <tr>
+            <td>vertical</td>
+            <td>'center'<br />'top'<br />'bottom'<br /><span class="text-muted">'topedge'</span><br /><span class="text-muted">'bottomedge'</span></td>
+            <td>'center'</td>
+            <td><p>Sets vertical position.</p>
+                <p class="text-muted"><small>Options `topedge` and `bottomedge` can be used only for tooltips, and will align the tooltip to the top or bottom edge of the opening element (`openelement`).</small></p></td>
+        </tr>
+        <tr>
+            <td>offsettop</td>
+            <td>number</td>
+            <td>0</td>
+            <td><p>Sets top offset to tooltip.</p></td>
+        </tr>
+        <tr>
+            <td>offsetleft</td>
+            <td>number</td>
+            <td>0</td>
+            <td><p>Sets left offset to tooltip.</p></td>
+        </tr>
+        <tr>
+            <td>escape</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td>Closes the popup when <kbd>Escape</kbd> key is pressed.</td>
+        </tr>
+        <tr>
+            <td>blur</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td>Closes the popup when clicked outside of it.</td>
+        </tr>
+        <tr>
+            <td>setzindex</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td>Sets default z-index to the popup (2001) and to the background (2000).</td>
+        </tr>
+        <tr>
+            <td>autozindex</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td><p>Sets highest z-index on the page to the popup.</p></td>
+        </tr>
+        <tr>
+            <td>keepfocus</td>
+            <td>boolean</td>
+            <td>true</td>
+            <td>Lock keyboard focus inside of popup. Recommended to be enabled.</td>
+        </tr>
+        <tr>
+            <td>focuselement</td>
+            <td>string <small class="text-muted"><i>(CSS&nbsp;selector)</i></small></td>
+            <td>'#<i>{popup_id}</i>'</td>
+            <td>Enables you to specify the element which will be focused upon showing the popup. By default, the popup element <code>#my_popup</code> will recieve the initial focus.</td>
+        </tr>
+        <tr>
+            <td>focusdelay</td>
+            <td>number</td>
+            <td>50</td>
+            <td>Sets a delay in milliseconds before focusing an element. This is to prevent page scrolling during opening transition, as browsers will try to move the viewport to an element which received the focus.</td>
+        </tr>
+        <tr>
+            <td>pagecontainer</td>
+            <td>string <small class="text-muted"><i>(CSS&nbsp;selector)</i></small></td>
+            <td></td>
+            <td><p>Sets a page container (to help screen reader users). Page container should be the element that surrounds all the content on the page (e.g. '.container' in the case of this very page).</p>
+                <p class="text-muted"><small>It's highly recommended that you set the page container to help some screen readers read the modal dialog correctly. Doing so, when the popup is visible, <code>aria-hidden="true"</code> will be set to the page container and <code>aria-hidden="false"</code> to the popup, and vice-versa when the popup closes. You can set `pagecontainer` once per website (e.g. <code>$.fn.popup.defaults.pagecontainer = '.container'</code>).</small></p></td>
+        </tr>
+        <tr>
+            <td>outline</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td><p>Shows a default browser outline on popup element when focused.</p>
+                <p class="text-muted"><small>Setting to <code>false</code> is equivalent to <code>#my_popup{outline: none;}</code>.</small></p></td>
+        </tr>
+        <tr>
+            <td>detach</td>
+            <td>boolean</td>
+            <td>false</td>
+            <td>
+                <p>Removes popup element from the DOM after closing transition.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>openelement</td>
+            <td>string <small class="text-muted"><i>(CSS&nbsp;selector)</i></small></td>
+            <td>'.<i>{popup_id}</i>_open'</td>
+            <td>Enables you to define custom element which will open the popup on click. By default, in our case it's set to <code>.my_popup_open</code>.</td>
+        </tr>
+        <tr>
+            <td>closeelement</td>
+            <td>string <small class="text-muted"><i>(CSS&nbsp;selector)</i></small></td>
+            <td>'.<i>{popup_id}</i>_close'</td>
+            <td>Enables you to define custom element which will close the popup on click. By default, in our case it's set to <code>.my_popup_close</code>.</td>
+        </tr>
+        <tr>
+            <td>transition</td>
+            <td>string <small class="text-muted"><i>(CSS&nbsp;transition)</i></small></td>
+            <td></td>
+            <td>
+                <p>Sets CSS transition when showing and hiding a popup.</p>
+                <p class="text-muted"><small>Use this if you don't need separate transition for background, or different transition for opening and closing the popup, or if you need to transition only selected properties – otherwise set custom transitions directly in CSS.</small></p>
+                <p class="text-muted"><small>Simple fade effect <code>$('#my_popup').popup({transition: 'all 0.3s'})</code> is equivalent to <code>#my_popup, #my_popup_wrapper, #my_popup_background {transition: all 0.3s;}</code></small></p>
+                <p class="text-muted"><small>Setting fade effect for all popups on the site: <code>$.fn.popup.defaults.transition = 'all 0.3s';</code> is equivalent to <code>.popup_content, .popup_wrapper, .popup_background {transition: all 0.3s;}</code></small></p>
+            </td>
+        </tr>
+        <tr>
+            <td>tooltipanchor</td>
+            <td>object <br /><small class="text-muted"><i>JQuery or DOM object</i></small></td>
+            <td></td>
+            <td>
+                <p>Sets an element to be an anchor for tooltip position.</p>
+                <p class="text-muted"><small>For example, for multiple opening links using the same tooltip on mouseover:</small></p>
+<pre class="prettyprint">
+<code>$('.my_popup_open').on({
+    mouseenter: function(event) {
+        $('#my_popup').popup({
+            tooltipanchor: event.target,
+            autoopen: true,
+            type: 'tooltip'
+        });
+    },
+    mouseleave: function() {
+        $('#my_popup').popup('hide');
+    }
+});</code>
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <p>Example:</p>
+<pre class="prettyprint">
+<code>$('#my_popup').popup({
+  opacity: 0.3,
+  transition: 'all 0.3s'
+});</code>
+</pre>
+            </td>
+        </tr>
+
+        </tbody>
+        </table>
+        </div>
+
+
+
+        <h3>Callback events</h3>
+
+        <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+       <tr>
+            <td>beforeopen</td>
+            <td>function</td>
+            <td>Callback function which will execute before the popup is opened.</td>
+        </tr>
+        <tr>
+            <td>onopen</td>
+            <td>function</td>
+            <td>Callback function which will execute when the popup starts to open.</td>
+        </tr>
+        <tr>
+            <td>onclose</td>
+            <td>function</td>
+            <td>Callback function which will execute when the popup starts to close.</td>
+        </tr>
+        <tr>
+            <td>opentransitionend</td>
+            <td>function</td>
+            <td>Callback function which will execute after the opening CSS transition is over, only if transition actually occurs and if supported by the browser.</td>
+        </tr>
+        <tr>
+            <td>closetransitionend</td>
+            <td>function</td>
+            <td>Callback function which will execute after the closing CSS transition is over, only if transition actually occurs and if supported by the browser.</td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <p>Example:</p>
+<pre class="prettyprint">
+<code>$('#my_popup').popup({
+  onopen: function() {
+    alert('Popup just opened!');
+  }
+});</code>
+</pre>
+            </td>
+        </tr>
+        </tbody>
+        </table>
+
+        <h3>Defaults</h3>
+
+        <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td><p>Default values for options and events can be modified.</p></td>
+            </tr>
+        </thead>
+        <tr>
+            <td>
+            <p>Example:</p>
+
+<pre class="prettyprint">
+<code>$.fn.popup.defaults.transition = 'all 0.3s';
+$.fn.popup.defaults.pagecontainer = '.container';
+</code></pre>
+            </td>
+        </tr>
+        </table>
+
+
+        <h3>Methods</h3>
+
+        <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>.popup(options)</td>
+            <td><p>Activates your content as a popup. Accepts an optional options <code>object</code>.</p>
+<pre class="prettyprint">
+<code>$('#my_popup').popup({
+  background: false
+});
+</code>
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>.popup('show')</td>
+            <td>
+                <p>Manually opens a popup.</p>
+                <pre class="prettyprint"><code>$('#my_popup').popup('show');</code></pre>
+            </td>
+        </tr>
+        <tr>
+            <td>.popup('hide')</td>
+            <td>
+                <p>Manually hides a popup.</p>
+                <pre class="prettyprint"><code>$('#my_popup').popup('hide');</code></pre>
+            </td>
+        </tr>
+        <tr>
+            <td>.popup('toggle')</td>
+            <td>
+                <p>Manually toggles a popup.</p>
+                <pre class="prettyprint"><code>$('#my_popup').popup('toggle');</code></pre>
+            </td>
+        </tr>
+        </tbody>
+        </table>
+
+
+        <p>&nbsp;</p>
+
+    </section>
+
+    <footer class="col-md-10 col-md-offset-1" role="contentinfo">
+
+        <iframe src="https://ghbtns.com/github-btn.html?user=vast-engineering&repo=jquery-popup-overlay&type=watch&size=small&count=true"
+            allowtransparency="true" frameborder="0" scrolling="0" width="100" height="20"></iframe>
+
+        <p class="text-muted"><small>Released under the <a href="http://opensource.org/licenses/MIT">MIT</a> license.</small></p>
+    </footer>
+
+</div>
+
+
+
+
+
+
+<!-- Set defaults -->
+<script>
+$(document).ready(function () {
+    $.fn.popup.defaults.pagecontainer = '.container'
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Basic -->
+
+<div id="basic" class="well" style="max-width:44em;">
+    <h4>Basic example</h4>
+    <p>Try to change the width and height of browser window, or to rotate your device, and also try to navigate with the <kbd>Tab</kbd> key.</p>
+    <p>You can close the dialog by pressing the <kbd>Esc</kbd> key, or by clicking on the background outside the content area, or by clicking on the Close button.</p>
+    <button class="basic_close fade_open btn btn-default">Next example</button>
+    <button class="basic_close btn btn-default">Close</button>
+</div>
+
+<script>
+$(document).ready(function () {
+  $('#basic').popup();
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Fade -->
+
+<div id="fade" class="well">
+    <h4>Fade example</h4>
+<pre class="prettyprint">
+<code>$('#fade').popup({
+  transition: 'all 0.3s',
+  scrolllock: true // optional
+});</code>
+</pre>
+    <p>Or you can set transitions directly in CSS:</p>
+<pre class="prettyprint"><code>$('#fade').popup();</code></pre>
+<pre class="prettyprint"><code>#fade,
+#fade_wrapper,
+#fade_background {
+  transition: all 0.3s;
+}
+</code>
+</pre>
+    <button class="fade_close fadeandscale_open btn btn-default">Next example</button>
+    <button class="fade_close btn btn-default">Close</button>
+</div>
+
+<script>
+$(document).ready(function () {
+
+    $('#fade').popup({
+      transition: 'all 0.3s',
+      scrolllock: true
+    });
+
+});
+</script>
+
+
+
+
+
+
+
+
+
+<!-- Fade & scale -->
+
+<div id="fadeandscale" class="well">
+    <h4>Fade &amp; scale example</h4>
+<pre class="prettyprint">
+<code>$('#fadeandscale').popup({
+  transition: 'all 0.3s'
+});</code>
+</pre>
+<pre class="prettyprint">
+<code>#fadeandscale {
+  transform: scale(0.8);
+}
+.popup_visible #fadeandscale {
+  transform: scale(1);
+}</code>
+</pre>
+    <button class="fadeandscale_close slide_open btn btn-default">Next example</button>
+    <button class="fadeandscale_close btn btn-default">Close</button>
+</div>
+
+<script>
+$(document).ready(function () {
+
+    $('#fadeandscale').popup({
+        pagecontainer: '.container',
+        transition: 'all 0.3s'
+    });
+
+});
+</script>
+
+<style>
+#fadeandscale {
+    -webkit-transform: scale(0.8);
+       -moz-transform: scale(0.8);
+        -ms-transform: scale(0.8);
+            transform: scale(0.8);
+}
+.popup_visible #fadeandscale {
+    -webkit-transform: scale(1);
+       -moz-transform: scale(1);
+        -ms-transform: scale(1);
+            transform: scale(1);
+}
+</style>
+
+
+
+
+
+
+
+
+
+<!-- Slide in -->
+
+<div id="slide" class="well">
+<h4>Slide in example</h4>
+<pre class="prettyprint">
+<code>$('#slide').popup({
+  outline: true, // optional
+  focusdelay: 400, // optional
+  vertical: 'top' //optional
+});
+</code>
+</pre>
+<pre class="prettyprint">
+<code>#slide_background {
+  transition: all 0.3s 0.3s;
+}
+#slide,
+#slide_wrapper {
+  transition: all 0.3s ease-out;
+}
+#slide {
+  transform: translateX(0) translateY(-40%);
+}
+.popup_visible #slide {
+  transform: translateX(0) translateY(0);
+}
+</code>
+</pre>
+    <button class="slide_close standalone_open btn btn-default">Next example</button>
+    <button class="slide_close btn btn-default">Close</button>
+</div>
+
+<script>
+$(document).ready(function () {
+
+    $('#slide').popup({
+        focusdelay: 400,
+        outline: true,
+        vertical: 'top'
+    });
+
+});
+</script>
+
+<style>
+#slide_background {
+    -webkit-transition: all 0.3s 0.3s;
+       -moz-transition: all 0.3s 0.3s;
+            transition: all 0.3s 0.3s;
+}
+#slide,
+#slide_wrapper {
+    -webkit-transition: all 0.4s;
+       -moz-transition: all 0.4s;
+            transition: all 0.4s;
+}
+#slide {
+    -webkit-transform: translateX(0) translateY(-40%);
+       -moz-transform: translateX(0) translateY(-40%);
+        -ms-transform: translateX(0) translateY(-40%);
+            transform: translateX(0) translateY(-40%);
+}
+.popup_visible #slide {
+    -webkit-transform: translateX(0) translateY(0);
+       -moz-transform: translateX(0) translateY(0);
+        -ms-transform: translateX(0) translateY(0);
+            transform: translateX(0) translateY(0);
+}
+</style>
+
+
+
+
+
+
+
+
+
+<!-- Stand alone -->
+
+<div id="standalone">
+<h4>Stand alone example</h4>
+<pre class="prettyprint">
+<code>$('#standalone').popup({
+  color: 'white',
+  opacity: 1,
+  transition: '0.3s',
+  scrolllock: true
+});
+</code>
+</pre>
+<pre class="prettyprint">
+<code>#standalone {
+  transform: scale(0.8);
+}
+.popup_visible #standalone {
+  transform: scale(1);
+}
+</code>
+</pre>
+    <button class="standalone_close active_bg_open btn btn-default">Next example</button>
+    <button class="standalone_close btn btn-default">Close</button>
+</div>
+
+
+
+<script>
+$(document).ready(function () {
+
+    $('#standalone').popup({
+      color: 'white',
+      opacity: 1,
+      transition: '0.3s',
+      scrolllock: true
+    });
+
+});
+</script>
+
+<style>
+#standalone {
+    -webkit-transform: scale(0.8);
+       -moz-transform: scale(0.8);
+        -ms-transform: scale(0.8);
+            transform: scale(0.8);
+}
+.popup_visible #standalone {
+    -webkit-transform: scale(1);
+       -moz-transform: scale(1);
+        -ms-transform: scale(1);
+            transform: scale(1);
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Active background -->
+
+<div id="active_bg" class="well" style="max-width:44em;">
+    <h4>Active background example</h4>
+    <p>You can click on any element at the background : they still active and won't close the popup.</p>
+    <p>You can close the dialog by pressing the <kbd>Esc</kbd> key, or by clicking on the Close button.</p>
+    <button class="active_bg_close my_tooltip_open btn btn-default">Next example</button>
+    <button class="active_bg_close btn btn-default">Close</button>
+</div>
+
+<script>
+$(document).ready(function () {
+  $('#active_bg').popup({
+    backgroundactive:true
+  });
+});
+</script>
+
+
+
+
+<!-- Tooltip -->
+
+<div id="my_tooltip" class="well">
+    <a href="#" class="my_tooltip_close" style="float:right;padding:0 0.4em;">×</a>
+    <h4>Tooltip example</h4>
+    <p>Tooltip content will be positioned relative to the opening link.</p>
+    <button class="my_tooltip_close fall_open btn btn-default">Next example</button>
+    <button class="my_tooltip_close btn btn-default">Close</button>
+</div>
+
+<script>
+$(document).ready(function () {
+
+    $('#my_tooltip').popup({
+        type: 'tooltip',
+        vertical: 'top',
+        transition: '0.3s all 0.1s',
+        tooltipanchor: $('#my_tooltip_open')
+    });
+
+});
+</script>
+
+
+
+<!-- Callback events -->
+
+<div id="fall" class="well" style="max-width: 45em;">
+    <h4>Callback events</h4>
+<pre class="prettyprint">
+<code>$('#fall').popup({
+        beforeopen: function () {
+            alert('beforeopen');
+        },
+        onopen: function () {
+            alert('onopen');
+        },
+        onclose: function () {
+            alert('onclose');
+        },
+        opentransitionend: function () {
+            alert('opentransitionend');
+        },
+        closetransitionend: function () {
+            alert('closetransitionend');
+        }
+    });
+</code>
+</pre>
+    <button class="fall_close other_open btn btn-default">Next example</button>
+    <button class="fall_close btn btn-default">Close</button>
+</div>
+
+<script>
+$(document).ready(function () {
+
+    $('#fall').popup({
+        beforeopen: function () {
+            alert('beforeopen');
+        },
+        onopen: function () {
+            alert('onopen');
+        },
+        onclose: function () {
+            alert('onclose');
+        },
+        opentransitionend: function () {
+            alert('opentransitionend');
+        },
+        closetransitionend: function () {
+            alert('closetransitionend');
+        }
+    });
+
+});
+</script>
+
+<style>
+    #fall_background {
+        -webkit-transition: all 3s;
+           -moz-transition: all 3s;
+                transition: all 3s;
+    }
+    #fall_wrapper {
+        -webkit-transition: all 3s;
+           -moz-transition: all 3s;
+                transition: all 3s;
+        -webkit-perspective: 1300px;
+        -moz-perspective: 1300px;
+        perspective: 1300px;
+    }
+    #fall {
+        -webkit-transition: all 3s ease-in;
+        -moz-transition: all 3s ease-in;
+        transition: all 3s ease-in;
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        -webkit-transform: translateZ(600px) rotateX(20deg);
+        -moz-transform: translateZ(600px) rotateX(20deg);
+        -ms-transform: translateZ(600px) rotateX(20deg);
+        transform: translateZ(600px) rotateX(20deg);
+    }
+    .popup_visible #fall {
+        -webkit-transform: translateZ(0px) rotateX(0deg);
+        -moz-transform: translateZ(0px) rotateX(0deg);
+        -ms-transform: translateZ(0px) rotateX(0deg);
+        transform: translateZ(0px) rotateX(0deg);
+    }
+</style>
+
+
+
+
+
+
+<!-- Other examples -->
+
+<div id="other" class="well" style="max-width:44em; min-width: 30em;">
+    <h4>Other examples:</h4>
+    <ul>
+        <li><a target="_blank" href="https://output.jsbin.com/rugaweq/">Viewport Image</a></li>
+    </ul>
+    <button class="other_close btn btn-default">Close</button>
+</div>
+
+<script>
+$(document).ready(function () {
+  $('#other').popup();
+});
+</script>
+
+
+
+
+
+
+<!-- Google Prettify syntax highlighting -->
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?autoload=true&lang=css"></script>
+<style>
+    pre.prettyprint {padding: 9px 14px;}
+</style>
+
+</body>
+</html>
