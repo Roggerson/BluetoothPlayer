@@ -7,6 +7,7 @@
 
   <link rel="stylesheet" href="./css/bootstrap.css"> 
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/style.scss">
   <link rel="stylesheet" href="./rippler/dist/css/rippler.css">
   <link rel="stylesheet" href="./css/progres-bar.css">
   <link rel="stylesheet" href="./css/radialProgress.css">
@@ -28,6 +29,13 @@
   <div class="btn_play">
     <i class="glyphicon glyphicon-play"></i>
   </div>
+  
+  <div class="btn_next">
+    <i class="glyphicon glyphicon-forward"></i>
+  </div>
+  <div class="btn_previous">
+    <i class="glyphicon glyphicon-backward"></i>
+  </div>
 
   <div class="progress">
     <svg class="progress-circle" width="400" height="400">
@@ -45,8 +53,18 @@
 
           <div id="scannedDevices"class="popr-box" data-box-id="1">
           <!-- pop up items -->
-          </div> 
-  
+</div>
+
+
+<div class="slidecontainer">
+  <input type="range" min="50" max="100" value="75" class="slyder" id="myRange">
+</div>
+
+<!-- <div>
+  <input type="range" min="1" max="100" value="50" class="custom-range">
+</div> -->
+<div class="safdat"></div>
+
 <div class="currentlyConnected" ></div>
 
 </div>

@@ -3,17 +3,41 @@
 }
 
 .btn_play {
+    position: absolute;
     width: 100px;
     height: 100px;
     color: rgb(240, 240, 240);
     background-color:rgb(70, 69, 69);
-    z-index: -1;
-    position: fixed;
-    top: 45%;
+
+    top: 40%;
     left:370px;
     font-size: 70px;
     z-index: -1;
   }
+
+.btn_next {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    color: rgb(70, 69, 69);
+    background-color:rgb(255, 255, 255);
+    left:80%;
+    top: 45%;
+    font-size: 70px;
+    z-index: 10;
+}
+
+.btn_previous {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    color: rgb(70, 69, 69);
+    background-color:rgb(255, 255, 255);
+    top: 45%;
+    left:50px;
+    font-size: 70px;
+    z-index: 10;
+}
 
 .playerContainer{
     position: absolute;
@@ -33,10 +57,9 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 25px;
     color: rgb(240, 240, 240);
-    z-index: 10;
+    z-index: 2;
    
 }
-
 
 #artist{
     position: relative;
@@ -59,9 +82,18 @@
     left:-45px;
 }
 
+
+.slyder {
+    position: absolute;
+    width: 50%;
+    left: 25%;
+    bottom: 20px;
+}
+
 /*hidden tags, act as buffer*/
 #hiddenPosition{
     display:none;
+    vertical-align: middle;
 }
 #hiddenDuration{
     display:none;

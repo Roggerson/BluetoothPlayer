@@ -1,5 +1,4 @@
 <?php
-
 $mac = $_REQUEST['mac'];
 if (strlen($mac) < 17){
     echo "ungültig";
