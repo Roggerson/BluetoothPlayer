@@ -21,7 +21,7 @@ As far as the 3D printing goes
 A frame that holds the raspi and fits into my car (Seat ibiza 6J 2009) has been desgined
 
 Basic GUI  (progress bar, play/pause button)
-![alt text](https://raw.githubusercontent.com/Roggerson/radio/master/tmp/file.png)
+![alt text](https://raw.githubusercontent.com/Roggerson/radio/master/tmp/Screeny.png)
 
 ToDo
 
