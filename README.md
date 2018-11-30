@@ -23,6 +23,7 @@ With this project I want to build my own bluetooth car radio which consists of:
 ## ToDo
 Frame for my car is still WIP
 
+
 ## Know issues
 Establishing bluetooth connection may be wonky at times. 
 Example: You connect your phone, start playing music, bluetooth connecton quits. If you leave it alone it will automatically reconnect. This however only happens if you connect the first time on startup or if you switch phones.
