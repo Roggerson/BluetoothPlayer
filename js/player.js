@@ -1,28 +1,34 @@
-var mac="safdat"; //Currently connected Device Mac address
-
 //Get current Device Mac and Track data
+var mac;
+var cnt=0;
 $(document).ready(function() {
+    //on first page load, get mac, doesnt matter if there is already one or if it is invalid
+    $.post("./scripts/php/checkDevCon.php",function(response) {
+        mac = response;
+        //console.log("page load: "+mac);
+    });
     setInterval(function() {
         $.post("./scripts/php/checkDevCon.php",function(response) {
-            console.log("Response: "+response + "Mac: "+mac+"\n");
-            if(mac == "safdat"){
-                console.log("first start");
-                mac = response;
-            }else if(response.length < 18){
-                console.log("No valid Mac address: "+response);
-            }else if(mac != response){//valid mac from device
+            //console.log("Bluetoothctl Mac: "+response);
+            if(mac != response && response.length == 18){
+                    //console.log("Connecting to new Device: "+response);
                     mac = response;
-                    console.log("Disconnecting from old Device and connecting to new one: "+response);
-                    //$.get('./scripts/php/newDevice.php');
                     $.get('./scripts/php/disconnect.php');//disconnect from old device
                     $.post('./scripts/php/connect.php',{'mac': mac});//connect to new device
+                    //$.get('./scripts/php/newDevice.php',{'mac': mac});    
             }else{
-                console.log("Connected to: "+mac);
+                //console.log("Current device: "+mac);
+                if(response.length < 18 && mac.length != 1){
+                    cnt ++;
+                    if(cnt >5){
+                        $.get('./scripts/php/connect.php',{'mac':mac});
+                        cnt = 0;
+                        console.log("Trying to connect to last device: "+mac);
+                    }
+                }
             }
           });
-          $("#Track").load("./scripts/php/getTrack.php",{'mac': mac });
-          //console.log($("#Track").load("./scripts/php/getTrack.php",{'mac': mac }).text());
-        
+          $("#Track").load("./scripts/php/getTrack.php",{'mac': mac });        
     }, 1000);
 });
 
@@ -49,7 +55,12 @@ $(document).on('click', ".popr-item", function () {
 //Play Pause Button
 var state = 'Pause';
 
-$(document).on('click', ".progress-circle-back, .btn_play, .trackInfo ", function () {
+$(document).on('mousedown', ".progress-circle-back, .btn_play, .trackInfo ", function () {
+    $(".btn_play").css('color', "rgb(140, 140, 140)"); //make button darker
+});
+
+$(document).on('mouseup', ".progress-circle-back, .btn_play, .trackInfo ", function () {
+    $(".btn_play").css('color', "rgb(240, 240, 240)"); //make button brighter
     if(state=='Play'){
         state = 'Pause';
         //console.log("send pause");
@@ -64,31 +75,36 @@ $(document).on('click', ".progress-circle-back, .btn_play, .trackInfo ", functio
         
     }  
 });
-function rc(){
-    rc1=Math.floor((Math.random() * 255) + 1);
-    rc2=Math.floor((Math.random() * 255) + 1);
-    rc3=Math.floor((Math.random() * 255) + 1);
-    rrgb='rgb('+rc1+','+rc2+','+rc3+')';
-    return rrgb;
-}
-//next song click
-$(document).on('click', ".btn_next", function () {
-    $.get('./scripts/php/control.php',{'mac' : mac , 'control' : "Next"});
-    $(this).css('color', rc());
-});
 
-//previous song click
-$(document).on('click', ".btn_previous", function () {
-    $.get('./scripts/php/control.php',{'mac' : mac , 'control' : "Previous"});
-    $(this).css('color', rc());
-});
+
+//btn_next - skip song 
+$(document).on('mousedown', ".btn_next", function(){
+        console.log("next down");
+        $(this).css('color', "rgb(140, 140, 140)"); //make button darker
+    });
+    //optic feedback for pressing the button
+    $(document).on('mouseup', ".btn_next", function(){
+        $.get('./scripts/php/control.sphp',{'mac' : mac , 'control' : "Next"});
+        $(this).css('color', "rgb(240, 240, 240)");
+    });
+
+//btn_previous - previous song 
+    $(document).on('mousedown', ".btn_previous", function(){
+        console.log("prev down");
+        $(this).css('color', "rgb(140, 140, 140)"); //make button darker
+    });
+    //optic feedback for pressing the button
+    $(document).on('mouseup', ".btn_previous", function(){
+        $.get('./scripts/php/control.php',{'mac' : mac , 'control' : "Previous"});
+        $(this).css('color', "rgb(240, 240, 240)");
+    });
 
 //Volume bar event
 $(document).on('click', ".slyder", function () {
     volume = $(this).val();
     console.log("Set volume to: "+volume);
    
-    $(".safdat").load("./scripts/php/volume.php",{'volume' : volume});
+    $(".safdat").load('./scripts/php/volume.php',{'volume' : volume});
 });
 
 //RADIAL
@@ -125,3 +141,5 @@ $(document).ready(function() {
       ,duration        :  300
     });
   });
+
+

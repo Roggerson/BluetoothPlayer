@@ -61,9 +61,9 @@ expect {
 exp_continue
 }
 
-expect -re $prompt
-send "trust $mac\r"
-sleep 1
+#expect -re $prompt
+#send "trust $mac\r"
+#sleep 1
 
 set outputFilename "/var/www/html/radiogui/scripts/bash/trustedDevices.txt"
 set outFileId [open $outputFilename "a"] 

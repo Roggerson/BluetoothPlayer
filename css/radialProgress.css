@@ -11,15 +11,16 @@
   height: 400px;
   overflow: hidden;
   
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(0, 0, 0, 0);
   z-index: -2;
 }
 
 svg:not(:root) {
   overflow: hidden;
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(0, 0, 0, 0);
 
 }
+
 .progress-circle {
 transform: rotate(-90deg);
 position: fixed;
@@ -28,7 +29,8 @@ left:25%;
 
 .progress-circle-back {
 position: fixed;
-fill: rgb(70, 69, 69); 
+fill: rgb(0, 0, 0);
+
 stroke: rgb(218, 217, 217);
 stroke-width:20px;
 }
@@ -36,7 +38,7 @@ stroke-width:20px;
 .progress-circle-prog {
 fill: none; 
 
-stroke: rgb(30, 255, 0);
+stroke: rgb(255, 0, 0);
 stroke-width: 20;  
 stroke-dasharray: 0 999;    
 stroke-dashoffset: 0px;

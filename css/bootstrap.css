@@ -12,9 +12,9 @@ html {
 body {
   margin: 0;
   overflow: hidden;
+  background-image: url("../img/bg.jpg");
+  background-size: 800px 480px;
 }
-
-
 article,
 aside,
 details,
@@ -5130,7 +5130,7 @@ a.thumbnail.active {
   height: 20px;
   margin-bottom: 20px;
   overflow: hidden;
-  background-color: #f5f5f5;
+  background-color: rgba(0, 0, 0, 0);
   border-radius: 4px;
 }
 .progress-bar {
