@@ -84,7 +84,7 @@ $(document).on('mousedown', ".btn_next", function(){
     });
     //optic feedback for pressing the button
     $(document).on('mouseup', ".btn_next", function(){
-        $.get('./scripts/php/control.sphp',{'mac' : mac , 'control' : "Next"});
+        $.get('./scripts/php/control.php',{'mac' : mac , 'control' : "Next"});
         $(this).css('color', "rgb(240, 240, 240)");
     });
 
