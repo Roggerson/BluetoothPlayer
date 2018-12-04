@@ -1,4 +1,5 @@
 #!/bin/sh
+pactl load-module module-bluetooth-discover
 xset -dpms
 xset s off
 xset s noblank
