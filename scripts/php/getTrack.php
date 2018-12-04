@@ -5,8 +5,8 @@ $title="-";
 
 $mac = trim($_REQUEST['mac']);
 
-$songInfo=shell_exec("/var/www/html/radiogui/scripts/bash/control.sh $mac Track");
-$nowMilliSec=shell_exec("/var/www/html/radiogui/scripts/bash/control.sh $mac Position");
+$songInfo=shell_exec("/var/www/html/BluetoothPlayer/scripts/bash/control.sh $mac Track");
+$nowMilliSec=shell_exec("/var/www/html/BluetoothPlayer/scripts/bash/control.sh $mac Position");
 
 
     //Character positions of each 

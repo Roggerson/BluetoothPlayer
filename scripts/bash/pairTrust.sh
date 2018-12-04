@@ -45,7 +45,7 @@ expect {
                 sleep 10
 
                 ##instead of user input directly in the console we read a file
-                set f [open "/var/www/html/radiogui/scripts/bash/passKey.txt" "r"]
+                set f [open "/var/www/html/BluetoothPlayer/scripts/bash/passKey.txt" "r"]
                 set passKey [read -nonewline $f]
                 close $f
 
@@ -65,7 +65,7 @@ exp_continue
 #send "trust $mac\r"
 #sleep 1
 
-set outputFilename "/var/www/html/radiogui/scripts/bash/trustedDevices.txt"
+set outputFilename "/var/www/html/BluetoothPlayer/scripts/bash/trustedDevices.txt"
 set outFileId [open $outputFilename "a"] 
 puts $outFileId $mac
 close $outFileId

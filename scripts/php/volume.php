@@ -4,6 +4,6 @@
 
 putenv("PULSE_SERVER=/run/user/".getmyuid()."/pulse/native");
 $volume=$_REQUEST['volume']; /* $argv[1]; */
-shell_exec("/var/www/html/radiogui/scripts/bash/volume.sh $volume");
+shell_exec("/var/www/html/BluetoothPlayer/scripts/bash/volume.sh $volume");
 
 ?>
