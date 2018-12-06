@@ -24,7 +24,7 @@ sudo sed -i "17s/www-data/$USER/" /etc/apache2/envvars
 
 sudo chown $USER /var/www/html/
 
-echo "\n-------------------------------------------------\n\tDownloading from git into var/www/html/\n\tCopying xserver init files to home directory of current user\n--------------------------------------------$
+echo "\n-------------------------------------------------\n\tDownloading from git into var/www/html/\n\tCopying xserver init files to home directory of current user\n--------------------------------------------$"
 
 git clone https://github.com/Roggerson/BluetoothPlayer.git /var/www/html/BluetoothPlayer
 mv /var/www/html/BluetoothPlayer/.xinitrc /home/$USER/
