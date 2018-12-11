@@ -16,6 +16,8 @@ With this project I want to build my own bluetooth car radio which consists of:
 - Control over the audio via gui, this includes play,pause,skip song, previous song, and volume control
 - If your device disconnects the pi will try to reconnect tothe last connected device every 5 seconds
 
+## 3D Printed panel
+You can view and download the mount-panel at https://www.thingiverse.com/thing:3171938
 
 ## Music Player GUI
 ![alt text](https://raw.githubusercontent.com/Roggerson/radio/master/tmp/Screenshot.png)
