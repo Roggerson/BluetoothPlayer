@@ -12,6 +12,6 @@ while(!feof($f)){
   }
 fclose($f);
 
-echo "\n</table></form></body></html>";
+//echo "\n</table></form></body></html>";
 //header('Location: ../../index.php');
 ?> 

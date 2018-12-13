@@ -45,8 +45,12 @@ expect {
                 sleep 10
 
                 ##instead of user input directly in the console we read a file
-                set f [open "/var/www/html/BluetoothPlayer/scripts/bash/passKey.txt" "r"]
+                set f [open "/var/www/html/BluetoothPlayer/scripts/bash/passKey" "r"]
                 set passKey [read -nonewline $f]
+                close $f
+
+                set f [open "/var/www/html/BluetoothPlayer/scripts/bash/passKey" "w"]
+                puts $f ""
                 close $f
 
                 #user interaction directly in console
@@ -61,9 +65,9 @@ expect {
 exp_continue
 }
 
-#expect -re $prompt
-#send "trust $mac\r"
-#sleep 1
+expect -re $prompt
+send "trust $mac\r"
+sleep 1
 
 set outputFilename "/var/www/html/BluetoothPlayer/scripts/bash/trustedDevices.txt"
 set outFileId [open $outputFilename "a"] 
@@ -72,5 +76,5 @@ close $outFileId
 
 expect -re $prompt
 send "quit\r"
-
+ 
 expect eof

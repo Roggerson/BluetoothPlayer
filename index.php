@@ -16,10 +16,8 @@
   <link rel="stylesheet" href="./css/popr.css"> 
 
   <script src="./js/jquery.min.js"></script>
-  <script src="./jqueryUi/jquery-ui.js"></script>
   <script src="./js/bootstrap.js"></script>
 
-  <script src="./rippler/dist/js/jquery.rippler.js"></script>
   <script src="./js/player.js"></script>
 
   <script type="text/javascript" src="./js/popr.js"></script>
@@ -59,7 +57,26 @@
           <div id="scannedDevices"class="popr-box" data-box-id="1">
           <!-- pop up items -->
 </div>
+<div id="numPad">  
+    <ul id="keyboard">  
+        <li class="numPadli"> <input class="numPadBox" type="text" name="numPadText" value=""> </li>
+        <li class="letter clearl">1</li>  
+        <li class="letter">2</li>  
+        <li class="letter">3</li>  
+        <li class="letter clearl">4</li>  
+        <li class="letter">5</li>  
+        <li class="letter">6</li> 
+        <li class="letter clearl">7</li>  
+        <li class="letter">8</li>  
+        <li class="letter">9</li>  
+        <li class="letter clearl"></li> </li>
+        <li class="letter">0</li>
+    </ul>  
+</div>
+
+<button id="scan">scan</button>
 <div class="safdat"></div>
+
 </div>
 </body>
 </html> 
