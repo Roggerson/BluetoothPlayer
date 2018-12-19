@@ -32,7 +32,11 @@ $(document).ready(function() {
           $("#Track").load("./scripts/php/getTrack.php",{'mac': mac });        
     }, 1000);
 });
-
+// _ ___ _
+//| |   | |
+//| |:D | |
+//|_|___|_|
+// 
 //scan
 $(document).on('click', "#scan", function () {  
     $.post("./scripts/php/scan.php",function() {
