@@ -1,6 +1,10 @@
+import("./player_h");
+
 //Get current Device Mac and Track data
 var mac;
 var cnt=0;
+var playerControl = new tplayerControl("","","","");
+
 $(document).ready(function() {
     $('.popr').popr();
     //on first page load, get mac, doesnt matter if there is already one or if it is invalid
