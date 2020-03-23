@@ -18,7 +18,8 @@
   <script src="./js/jquery.min.js"></script>
   <script src="./js/bootstrap.js"></script>
 
-  <script src="./js/player.js"></script>
+  <script type="text/javascript" src="./js/player.js"></script>
+  <script type="text/javascript" src="./js/player_h.js"></script>
 
   <script type="text/javascript" src="./js/popr.js"></script>
 </head>
