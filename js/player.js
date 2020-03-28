@@ -1,13 +1,13 @@
 $(document).ready(function () {
     //on first page load, get mac, doesnt matter if there is already one or if it is invalid
     var cnt = 0;
-    var playerControl = new tplayerControl("", naviagtion.pause, 20, defaultDevice, "");     // init Control object
+    var playerControl = new tplayerControl("pause", navigation.pause, 20, defaultDevice, "" ,"");     // init Control object
 
     console.log(playerControl);
+
     $('.popr').popr();
     $.post("/scripts/php/handler.php", function (response) {
-        playerControl.mac = response;
-        //console.log("page load: "+mac);
+        // playerControl.mac = response;
     });
 
     $(document).on('mousedown', ".progress-circle-back, .btn_play, .trackInfo ", function () {
@@ -17,22 +17,40 @@ $(document).ready(function () {
     // pause play button handling
     $(document).on('mouseup', ".progress-circle-back, .btn_play, .trackInfo ", function () {
         $(".btn_play").css('color', lightGrey); //make button brighter
-        if ( playerControl.state == naviagtion.play) {
+        if ( playerControl.state == navigation.play) {
             $('.btn_play i').removeClass("btglyphicon glyphicon-pause").addClass("glyphicon glyphicon-play");
-            playerControl.state = naviagtion.pause;
+            playerControl.state = navigation.pause;
 
-        } else if (playerControl.state == naviagtion.pause) {
+        } else if (playerControl.state == navigation.pause) {
             $('.btn_play i').removeClass("glyphicon glyphicon-play").addClass("glyphicon glyphicon-pause");
-            playerControl.state = naviagtion.play;
+            playerControl.state = navigation.play;
         }
-        $.post(handler, JSON.stringify(playerControl) ,function (response){
-          console.log("response:"+response);
-        });
-        /*
-        $.post(handler, { playerControl: JSON.stringify(playerControl), function (response){
-            console.log("Handler response: " + response);
-        }});*/
-        console.log("sending " + playerControl.state);
+
+        console.group("request: ");
+        console.log(JSON.stringify(playerControl));
+        console.groupEnd("response: ");
+
+        $.post( handler , {'playerControl': JSON.stringify(playerControl)} , function (response){
+            playerControl=JSON.parse(response);
+            handleErrors(playerControl.errMsg);
+          
+          console.group("response: ");
+          console.log(playerControl);
+          console.groupEnd("response: ");
+        })
+        
+        //Volume bar event
+        $(document).on('click', ".slyder", function () {
+            playerControl.navigation=navigation.volume;
+            playerControl.volume = $(this).val();
+
+            $.post( handler , {'playerControl': JSON.stringify(playerControl)} , function (response){
+                handleErrors(playerControl.errMsg)
+                playerControl=JSON.parse(response);
+                console.log("Setting volume to: " + playerControl.volume + " for device: " + playerControl.mac);
+
+            });
+         });
     });
     
     //scan
@@ -60,13 +78,13 @@ $(document).ready(function () {
     //btn_next - skip song 
     $(document).on('mousedown', ".btn_next", function () {
         $(this).css('color', darkGrey); //make button darker
-        console.log(naviagtion.next);
+        console.log(navigation.next);
     });
     //optic feedback for pressing the button
     $(document).on('mouseup', ".btn_next", function () {
         $.get(handler, {
             'mac': playerControl.mac,
-            'control': naviagtion.next
+            'control': navigation.next
         });
         $(this).css('color', lightGrey);
     });
@@ -80,20 +98,12 @@ $(document).ready(function () {
     $(document).on('mouseup', ".btn_previous", function () {
         $.get(handler, {
             'mac': playerControl.mac,
-            'control': naviagtion.prev
+            'control': navigation.prev
         });
         $(this).css('color', lightGrey);
     });
 
-    //Volume bar event
-    $(document).on('click', ".slyder", function () {
-       playerControl.volume = $(this).val();
-        console.log("Set volume to: " + playerControl.volume);
-
-        $(".safdat").load(handler, {
-            'volume': playerControl.volume
-        });
-    });
+    
 
     //RADIAL
     //Progress bar player
@@ -141,9 +151,10 @@ $(document).ready(function () {
             }
         }
     });
+    /*
     setInterval(function () {
         $.post("/scripts/php/handler.php", function (response) {
-            //console.log("Bluetoothctl Mac: "+response);
+            // console.log("Bluetoothctl Mac: "+response);
             if (playerControl.mac != response && response.length == 18) {
                 //console.log("Connecting to new Device: "+response);
                 playerControl.mac = response;
@@ -167,5 +178,5 @@ $(document).ready(function () {
         $("#Track").load("/scripts/php/handler.php", {
             'mac': playerControl.mac
         });
-    }, 1000);
+    }, 1000); */
 });

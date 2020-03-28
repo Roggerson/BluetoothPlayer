@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="./css/bootstrap.css"> 
   <link rel="stylesheet" href="./css/style.css">
   <!-- <link rel="stylesheet" href="./css/style.scss"> -->
-  <link rel="stylesheet" href="./rippler/dist/css/rippler.css">
+  <!-- <link rel="stylesheet" href="./rippler/dist/css/rippler.css"> -->
   <link rel="stylesheet" href="./css/progres-bar.css">
   <link rel="stylesheet" href="./css/radialProgress.css">
   <link rel="stylesheet" href="./css/normalize.css">
