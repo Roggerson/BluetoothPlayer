@@ -10,6 +10,7 @@ function tplayerControl(navigation, state, volume, mac, pass,errMsg) {
 const navigation = {
     connect: "connect",
     disconnect: "disconnect",
+    scan: "scan",
     play: "play",
     pause: "pause",
     next: "next",
@@ -19,7 +20,7 @@ const navigation = {
 Object.freeze(navigation);
 
 const handler = "./scripts/php/handler.php";
-const defaultDevice = "ö1:23:45:67:89:AB";
+const defaultDevice = "";
 
 const darkGrey  = "rgb(140, 140, 140)";
 const lightGrey = "rgb(240, 240, 240)";

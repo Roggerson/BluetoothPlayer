@@ -1,7 +1,7 @@
 $(document).ready(function () {
     //on first page load, get mac, doesnt matter if there is already one or if it is invalid
     var cnt = 0;
-    var playerControl = new tplayerControl("pause", navigation.pause, 20, defaultDevice, "" ,"");     // init Control object
+    var playerControl = new tplayerControl("", "", 0, "", "" ,"");     // init Control object
 
     console.log(playerControl);
 
@@ -55,14 +55,14 @@ $(document).ready(function () {
     
     //scan
     $(document).on('click', "#scan", function () {
-        $.post("/scripts/php/handler.php", function () {
+        playerControl.navigation=navigation.scan;
+        $.post("/scripts/php/handler.php", function (response) {
             $("#scannedDevices").load(handler);
-            console.log("finished scanning for devices");
+              console.log(JSON.parse(response));
         });
     });
 
     //On click of popr item, pair to device
-
     $(document).on('click', ".popr-item", function () {
         var macToPair = $(this).attr("value");
         $.post(handler, {
@@ -104,6 +104,7 @@ $(document).ready(function () {
     });
 
     
+
 
     //RADIAL
     //Progress bar player
@@ -153,28 +154,30 @@ $(document).ready(function () {
     });
     /*
     setInterval(function () {
-        $.post("/scripts/php/handler.php", function (response) {
-            // console.log("Bluetoothctl Mac: "+response);
-            if (playerControl.mac != response && response.length == 18) {
-                //console.log("Connecting to new Device: "+response);
-                playerControl.mac = response;
-                $.get(handler); //disconnect from old device
-                $.post(handler, {
-                    'mac': playerControl.mac
-                }); //connect to new device
-                //$.get(handler,{'mac': mac});    
-            } else {
-                //console.log("Current device: "+mac);
-                if (response.length < 18 && playerControl.mac.length != 1) {
-                    cnt++;
-                    if (cnt > 5) {
-                        //$.post(handler,{'mac':mac});
-                        cnt = 0;
-                        console.log("Trying to connect to last device: " + playerControl.mac);
+        if (playerControl.mac == ""){
+            $.post("/scripts/php/handler.php", function (response) {
+                // console.log("Bluetoothctl Mac: "+response);
+                if (playerControl.mac != response && response.length == 18) {
+                    //console.log("Connecting to new Device: "+response);
+                    playerControl.mac = response;
+                    $.get(handler); //disconnect from old device
+                    $.post(handler, {
+                        'mac': playerControl.mac
+                    }); //connect to new device
+                    //$.get(handler,{'mac': mac});    
+                } else {
+                    //console.log("Current device: "+mac);
+                    if (response.length < 18 && playerControl.mac.length != 1) {
+                        cnt++;
+                        if (cnt > 5) {
+                            //$.post(handler,{'mac':mac});
+                            cnt = 0;
+                            console.log("Trying to connect to last device: " + playerControl.mac);
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
         $("#Track").load("/scripts/php/handler.php", {
             'mac': playerControl.mac
         });
