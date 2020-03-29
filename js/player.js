@@ -1,7 +1,7 @@
 $(document).ready(function () {
     //on first page load, get mac, doesnt matter if there is already one or if it is invalid
     var cnt = 0;
-    var playerControl = new tplayerControl("", "", 0, "", "" ,"");     // init Control object
+    var playerControl = new tplayerControl("play", "pause", 0, "", "" ,"");     // init Control object
 
     console.log(playerControl);
 

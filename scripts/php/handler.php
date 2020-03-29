@@ -1,14 +1,14 @@
 <?php
     include 'handler_h.php';
-    define("DEBUG", "1");
     
     if ($argv[1] == "1") {
-      $handler = new handler("next","play","20","ö1:23:45:67:89:AB","","","");
+      $handler = new handler("next","play","20","ö1:23:45:67:89:AB","","",""); 
       $handler->validateJSON(json_encode($handler)); 
     }else{
-      $handler->validateJSON($_REQUEST['playerControl']);            
       $handler = new handler("","","","","","","");
+      $handler->validateJSON($_REQUEST['playerControl']);            
     }
+
     // validate data object for input erros
     $handler->validateData();
     

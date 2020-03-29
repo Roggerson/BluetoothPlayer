@@ -20,7 +20,7 @@ const navigation = {
 Object.freeze(navigation);
 
 const handler = "./scripts/php/handler.php";
-const defaultDevice = "";
+const defaultDevice = "ö1:23:45:67:89:AB";
 
 const darkGrey  = "rgb(140, 140, 140)";
 const lightGrey = "rgb(240, 240, 240)";
